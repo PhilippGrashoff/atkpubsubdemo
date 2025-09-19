@@ -1,0 +1,23 @@
+{
+  "name": "philippgrashoff/atkpubsubdemo",
+  "description": "Code sample to illustrate how brokering works",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "8.*",
+    "atk4/data": "6.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "12.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AtkPubSubDemo\\AtkPubSubDemo\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AtkPubSubDemo\\Tests\\": "tests"
+    }
+  }
+}
