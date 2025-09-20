@@ -5,8 +5,8 @@ is to get logic what should happen after `Model::save()` or `Model::delete()` aw
 
 There is a small `Broker` implemented as singleton. The Models just `publish()` their events (e.g. `Model::HOOK_AFTER_SAVE`) 
 to this broker.
-Other code can then `subscribe()` these events and act accordingly. In this sample repo, the 2 Controllers `SampleController` 
-and `YetAnotherController` reside within the same repository, but they could be in different repositories.
+Other code can then `subscribe()` these events and act accordingly. In this sample repo, there are `SampleController` 
+and `YetAnotherController` which subscribe.
 
 See or run the test code for a simple example. It illustrates that `ModelA` is unaware of any additional logic which
 should happen when it is saved but just publishes its after save event to the Broker. The 2 Controllers subscribe the 
@@ -16,7 +16,17 @@ The main benefits are:
 - No control flow logic within the Model hooks. The scope of the model can focus on the model itself and does not need to know the complete logic of your application.
 - This way, it is easier to split up an application into several repositories. As `ModelA` no longer needs to know what should happen when it is saved, this logic can easily be moved elsewhere if sensible. 
 
+### Using it to split up an application in several repos
+In this sample repo, the 2 Controllers `SampleController`and `YetAnotherController` reside within the same repository, but they could be in different repositories. 
+A repository setup which splits the logic into several repos could look like this:
 
+```mermaid
+graph TD;
+    A(Base Repo with Broker and Models) --> B(SomeOtherRepo);
+    A(Base Repo with Broker and Models) --> C(YetAnotherRepo);
+    B --> D(Application repo bringing all together);
+    C --> D;
+```
 
 ### How would it be without?
 Without using this simple pub/sub system, `ModelA::init()` would typically have looked like this, containing all the additional logic (or direct calls to it) within `HOOK_AFTER_SAVE`, meaning `ModelA` needed to be aware of all the other actions that should happen when it was saved: 
