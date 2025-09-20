@@ -19,8 +19,8 @@ The main benefits are:
 
 
 
-### How would it be without this?
-Without this, `ModelA::init()` would typically have looked like this, containing all the additional logic (or direct calls to it) within `HOOK_AFTER_SAVE`: 
+### How would it be without?
+Without using this simple pub/sub system, `ModelA::init()` would typically have looked like this, containing all the additional logic (or direct calls to it) within `HOOK_AFTER_SAVE`, meaning `ModelA` needed to be aware of all the other actions that should happen when it was saved: 
 ```php
 
     protected function init(): void
