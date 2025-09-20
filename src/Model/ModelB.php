@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Model;
+namespace AtkPubSubDemo\Model;
 
 use Atk4\Data\Model;
 

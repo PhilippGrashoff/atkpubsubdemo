@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AtkPubSubDemo\\AtkPubSubDemo\\": "src"
+      "AtkPubSubDemo\\": "src"
     }
   },
   "autoload-dev": {
