@@ -17,7 +17,10 @@ The main benefits are:
 - No control flow logic within the Model hooks. The scope of the model can focus on the model itself and does not need to know the complete logic of your application.
 - This way, it is easier to split up an application into several repositories. As `ModelA` no longer needs to know what should happen when it is saved, all of this logic can easily be moved elsewhere. 
 
-Without this, `ModelA::init()` would typically have looked like this, containing all the additional logic (or direct calls to it): 
+
+
+### How would it be without this?
+Without this, `ModelA::init()` would typically have looked like this, containing all the additional logic (or direct calls to it) within `HOOK_AFTER_SAVE`: 
 ```php
 
     protected function init(): void
@@ -41,13 +44,6 @@ Without this, `ModelA::init()` would typically have looked like this, containing
                         ->set('name', 'Hans')
                         ->save();
                 }
-            }
-        );
-
-        $this->onHook(
-            Model::HOOK_AFTER_DELETE,
-            function (self $entity) {
-                Broker::get()->publish(Model::HOOK_AFTER_DELETE, [$entity]);
             }
         );
     }
